@@ -14,11 +14,12 @@ const io = socketIO(server); //provides a js library to use in browser as well. 
 app.use(express.static(pathPublic)) //configure express to use the path to public
 
 io.on('connection', (socket) => {
-  console.log('New user connected');
-  socket.emit('newMessage', {from: "Onzi", text: "O, tozi!"})
+  // console.log('New user connected');
+  // socket.emit('newMessage', {from: "Onzi", text: "O, tozi!"})
 
   // socket.on('createMessage', function(message) {
   //   console.log(message)
+  //   socket.emit('newMessage', message)
   // })
 
   socket.on('createMessage', function(msg) {
