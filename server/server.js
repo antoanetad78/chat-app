@@ -13,19 +13,34 @@ const io = socketIO(server); //provides a js library to use in browser as well. 
 
 app.use(express.static(pathPublic)) //configure express to use the path to public
 
-io.on('connection', (socket) => {
-  // console.log('New user connected');
-  // socket.emit('newMessage', {from: "Onzi", text: "O, tozi!"})
+io.on('connection', function (socket) {
+  socket.emit('newMessage', {from: 'Admin', text: 'Welcome User'})//welcome the user that just joined. only User will see it
+  socket.broadcast.emit('newMessage', {text: 'User joined the chat'})//alert the chat that the User just joined. All  but User see it
 
   // socket.on('createMessage', function(message) {
   //   console.log(message)
   //   socket.emit('newMessage', message)
   // })
+  //logs the message and emits it back to whomever sent it
+
+
+  
+  // socket.on('createMessage', function(msg) {
+  //   io.emit('newMessage', msg);
+  // })
+  //emits the message to everybody, includong the sender
 
   socket.on('createMessage', function(msg) {
-    io.emit('newMessage', msg);
+    socket.broadcast.emit('newMessage', msg);
   })
-  socket.on('disconnect', () => {
+  //emits the message to everybody BUT the sender
+
+  
+
+
+
+  
+  socket.on('disconnect', function () {
     console.log('User disconnected');    
   })
   

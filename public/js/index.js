@@ -3,7 +3,7 @@
 
      socket.on('connect', function () {
        console.log('Çonnected to server');
-      socket.emit('createMessage', {to:"Onzi", text: "Alo, tozi e!"})
+      //socket.emit('createMessage', {to:"Onzi", text: "Alo, tozi e!"})
      })
      
 
