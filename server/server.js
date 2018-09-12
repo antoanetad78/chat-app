@@ -10,12 +10,13 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server); //provides a js library to use in browser as well. On localhost:3000/socket.io/socket.io.js
 
+const {generateMessage} = require('./utils/message')
 
 app.use(express.static(pathPublic)) //configure express to use the path to public
 
 io.on('connection', function (socket) {
-  socket.emit('newMessage', {from: 'Admin', text: 'Welcome User'})//welcome the user that just joined. only User will see it
-  socket.broadcast.emit('newMessage', {text: 'User joined the chat'})//alert the chat that the User just joined. All  but User see it
+  socket.emit('newMessage', generateMessage('Admin', 'Welcome to chat-app'))//welcome the user that just joined. only User will see it
+  socket.broadcast.emit('newMessage', generateMessage('Admin', 'User User Joined the chat'))//alert the chat that the User just joined. All  but User see it
 
   // socket.on('createMessage', function(message) {
   //   console.log(message)
@@ -26,12 +27,12 @@ io.on('connection', function (socket) {
 
   
   // socket.on('createMessage', function(msg) {
-  //   io.emit('newMessage', msg);
+  //   io.emit('newMessage', generateMessage(msg.from, msg.text));
   // })
   //emits the message to everybody, includong the sender
 
   socket.on('createMessage', function(msg) {
-    socket.broadcast.emit('newMessage', msg);
+    socket.broadcast.emit('newMessage', generateMessage(msg.from, msg.text));
   })
   //emits the message to everybody BUT the sender
 
