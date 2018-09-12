@@ -11,7 +11,22 @@ socket.on('disconnect', function () {
 
 socket.on('newMessage', function(message) {
    console.log('New Message: ', message)
+   let li = jQuery('<li></li>')
+   li.text(`${message.from} : ${message.text}`)
+
+   jQuery('#messages-list').append(li)
+
  })
 
      
-   
+//add acknowledgement function as a third argument to an emitter
+
+jQuery('#message-form').on('submit', function(e) {
+  e.preventDefault()
+  socket.emit('createMessage', {
+    from: 'User',
+    text: jQuery('[name=MessageText]').val()
+  }, function () {
+    console.log('Acknowledged')
+  })
+})

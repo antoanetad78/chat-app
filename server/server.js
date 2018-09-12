@@ -26,15 +26,19 @@ io.on('connection', function (socket) {
 
 
   
-  // socket.on('createMessage', function(msg) {
-  //   io.emit('newMessage', generateMessage(msg.from, msg.text));
-  // })
+  socket.on('createMessage', function(msg, callback) {
+    io.emit('newMessage', generateMessage(msg.from, msg.text));
+  callback();
+  })
   //emits the message to everybody, includong the sender
 
-  socket.on('createMessage', function(msg) {
-    socket.broadcast.emit('newMessage', generateMessage(msg.from, msg.text));
-  })
+  // socket.on('createMessage', function(msg, callback) {
+  //   socket.broadcast.emit('newMessage', generateMessage(msg.from, msg.text));
+  //   callback('This is from the server');
+  // })
   //emits the message to everybody BUT the sender
+  //sends callback back to the fron end and fires the third argument in the emit event; Acknowledgement. Callback takes 1 argument.
+  //if we want to pass multiple data items we use object with multiple properties
 
   
 
