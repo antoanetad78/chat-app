@@ -4,19 +4,29 @@
 
  <head>
   <meta charset='utf-8'>
-  
+  <link rel="stylesheet", href="/css/styles.css" />
  </head>
 
 
- <body>
-   <p>Welcome to the chat app!</p>  
+ <body class="chat">
+   <div class="chat__sidebar">
+     <h3>People</h3>
+     <div class="users"></div>
+   </div>  
 
-   <ol id="messages-list"></ol>
-   
-   <form id="message-form">
-    <input type="text", name="MessageText", placeholder="Message" /> 
-    <button>Send</button>
-   </form>
+   <div class="chat__main">
+      
+        <ol id="messages-list" class="chat__messages"></ol>
+        
+        <div class="chat__footer">
+            <form id="message-form">
+                <input type="text", name="MessageText", placeholder="Message" autocomplete="off", autofocus/> 
+                <button>Send</button>
+              </form>
+        </div>
+        
+   </div>
+
 
    
 

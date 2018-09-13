@@ -20,13 +20,13 @@ socket.on('newMessage', function(message) {
 
      
 //add acknowledgement function as a third argument to an emitter
-
+let messageTextbox = jQuery('[name=MessageText]')
 jQuery('#message-form').on('submit', function(e) {
   e.preventDefault()
   socket.emit('createMessage', {
     from: 'User',
-    text: jQuery('[name=MessageText]').val()
+    text: messageTextbox.val()
   }, function () {
-    console.log('Acknowledged')
+    messageTextbox.val('')
   })
 })
